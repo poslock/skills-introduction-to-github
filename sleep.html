@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background: rgb(19, 11, 129);">
+    <header style="width: auto;"><center><h1 style="color: aqua;">SOMA FOR BETTER SLEEP</h1></center></header>
+    <hr>
+
+    <!-- Daftar lagu pengantar tidur akan muncul di sini -->
+    <div id="songs-list">
+        <h2 style="color: aqua;">Sleep Songs</h2>
+        <ul id="songs"></ul>
+    </div>
+
+    <!-- Script untuk mengambil dan menampilkan data dari server -->
+    <script>
+        // Ambil data lagu dari server dan tampilkan
+        fetch('http://localhost:3000/songs')
+            .then(response => response.json())
+            .then(data => {
+                const songsList = document.getElementById('songs');
+                data.forEach(song => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<strong>${song.title}</strong> by ${song.artist} - <a href="${song.url}" target="_blank">Listen</a>`;
+                    songsList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching songs:', error);
+            });
+    </script>
+
+    <footer>
+        <p><center style="color: aliceblue;">
+            Web ini saya buat sebagai latihan dan membantu para pengidap insomnia untuk tidur walau hanya sedikit
+        </center></p>
+    </footer>
+</body>
+</html>

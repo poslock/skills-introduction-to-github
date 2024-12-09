@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soma App - Songs</title>
+</head>
+<body>
+  <h1>Songs for Better Sleep</h1>
+  <ul id="songs-list"></ul>
+
+  <script>
+    // Ambil data lagu dari server
+    fetch('http://localhost:3000/songs')
+      .then(response => response.json())
+      .then(data => {
+        const songsList = document.getElementById('songs-list');
+        data.forEach(song => {
+          const listItem = document.createElement('li');
+          listItem.innerHTML = `<strong>${song.title}</strong> by ${song.artist} <a href="${song.url}" target="_blank">Listen</a>`;
+          songsList.appendChild(listItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching songs:', error);
+      });
+  </script>
+</body>
+</html>
